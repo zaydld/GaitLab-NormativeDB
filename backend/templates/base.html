@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Laboratoire de Marche{% endblock %}</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <header class="bg-blue-600 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Gestion du Laboratoire de Marche</h1>
+            <nav>
+                <a href="{{ url_for('index') }}" class="text-white hover:text-blue-200 px-3 py-2 rounded-md transition duration-300">Accueil</a>
+                {% if 'logged_in' in session %}
+                <a href="{{ url_for('logout') }}" class="text-white bg-red-600 hover:bg-red-700 px-3 py-2 rounded-md transition duration-300">Déconnexion</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-6 p-4 flex-grow">
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-4">
+                    {% for category, message in messages %}
+                        <div class="p-3 mb-2 rounded-lg text-sm {% if category == 'error' %}bg-red-100 text-red-800{% elif category == 'success' %}bg-green-100 text-green-800{% else %}bg-blue-100 text-blue-800{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-blue-600 text-white p-4 mt-8 text-center shadow-inner">
+        <p>&copy; 2025 Laboratoire de Marche. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
