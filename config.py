@@ -1,7 +1,7 @@
 
 DB_HOST = "localhost"
 DB_USER = "root"
-DB_PASSWORD = "Zayd2004@"
+DB_PASSWORD = "x"
 DB_NAME = "labomarche"
 DB_PORT = 3308
 
